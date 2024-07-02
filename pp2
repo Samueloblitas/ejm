@@ -1,0 +1,73 @@
+#Se le solicita escribir un programa en Python que permita realizar lo siguiente:
+
+•	Ingrese el número de elementos de una lista de números. Este es un valor que no debe ser mayor a 50.
+•	Genere aleatoriamente los datos de la lista que serán números enteros entre 50 y 1000.
+•	Determine y muestre la cantidad de números primos existentes en la lista.
+•	Generar y mostrar una nueva lista que contenga los números que no primos de la lista.
+•	Determinar y mostrar el número de repeticiones del máximo valor de la lista.
+•	Ordene descendentemente los elementos de la lista.
+Para la resolución del programa DEBE IMPLEMENTAR NECESARIAMENTE una función que determine si un número es primo o no.
+
+
+
+
+
+import random
+
+
+def esprimo(numero):
+    if numero <= 1:
+        return False
+    if numero <= 3:
+        return True
+    if numero % 2 == 0 or numero % 3 == 0:
+        return False
+    i = 5
+    while i * i <= numero:
+        if numero % i == 0 or numero % (i + 2) == 0:
+            return False
+        i += 6
+    return True
+
+
+def main():
+    while True:
+        try:
+            n = int(input("Ingrese un numero menor a 50"))
+            if 1 <= n <= 50:
+                break 
+            else :
+                print("Error: El numero de elementos tiene que ser menor a 50 ")
+
+        except ValueError:
+            print("Por favor ingrese un numero valido")
+
+    lista = []
+    for i in range(n):
+        lista.append(random.randint(50, 1000))
+
+    print(f"\nLista generada:{ lista}")
+
+    primos = []
+    noprimos = []
+    for num in lista:
+        if esprimo(num):
+            primos.append(num)
+        else:
+            noprimos.append(num)
+
+    print(f"\nCantidad de números primos en la lista: {len(primos)}")
+    print(f"Números primos: {primos}")
+    
+    print(f"\nLista de números que no son primos: {noprimos}")
+    
+    max_valor = max(lista)
+    repeticiones_max = lista.count(max_valor)
+    print(f"\nEl máximo valor en la lista es: {max_valor}")
+    print(f"Número de repeticiones del máximo valor: {repeticiones_max}")
+    
+    lista.sort(reverse=True)
+    print(f"\nLista ordenada descendentemente:{ lista}")
+
+if __name__ == "__main__":
+    main()

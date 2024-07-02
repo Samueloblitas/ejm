@@ -1,0 +1,83 @@
+#PREGUNTA 1
+
+#Se le solicita implementar en Python lo siguiente:
+#	(1.5 puntos) Una función cantidad_impares(n) que permita hallar la cantidad de dígitos impares que contiene un número. Por ejemplo, si n fuese 104, la función devolvería 1.
+
+#	(1.5 puntos) Una función calcular_suma(n, x) que permita hallar la suma de los términos de la siguiente serie.
+
+#S=∑_(k=0)^n▒〖〖(-1)〗^k  〖(x-1)〗^(k+1)/(k+1)〗
+
+#(0.5 puntos) Luego utilizando las funciones realizadas escriba la función principal, que mediante un menú solicite hallar la cantidad de dígitos impares que contiene un número o permita calcular la suma de los términos de la serie.
+
+#(0.5 puntos) Validaciones:
+	#En el caso de la cantidad de dígitos impares debe verificar que el valor de n debe ser positivo.
+	#En el caso de la suma de términos, la cantidad de términos de la serie no debe ser menor que 0 ni mayor a 20. El valor de x debe ser positivo y menor o igual a 2.
+
+
+
+
+def cantidad_impares(n):
+
+    cantidad = 0
+    n = abs(n)
+    while  n > 0 :
+        digito = n % 10
+        if digito % 2 != 0:
+           return digito
+        n //= 10
+
+    return -1
+
+    
+def calcular_suma(n,x):
+    suma = 0
+    for k in range(n+1):
+        suma += (-1)**k * ((x - 1)**(k + 1)) / (k + 1)
+        return suma 
+
+
+#main 
+def menu():
+    print("MENU DE OPCIONES")
+    print("1. Hallar la cantidad de digitos impares ")
+    print("2. Calcular la serie ")
+    print("0. Fin")
+
+    opcion = input("Ingrese el número de la opción deseada: ")
+
+    return opcion
+
+def main():
+    while True:
+        opcion = menu()
+
+        if opcion == '1':
+            try:
+                numero = int(input("Ingrese un número entero: "))
+                resultado = cantidad_impares(numero)
+
+                if resultado != -1:
+                    print(f"La cantidad de dígitos impares en el número {numero} es: {resultado}")
+                else:
+                    print("No se encontraron dígitos impares")
+            
+            except ValueError:
+                print("Error: Debe ingresar un número entero válido.")
+
+        elif opcion == '2':
+                n = int(input("Ingrese el valor de n (entero no negativo): "))
+                x = float(input("Ingrese el valor de x: "))
+                resultado = calcular_suma(n, x)
+                print(f"La suma de la serie es : {resultado}")
+            
+        if opcion == '0':
+            print("Saliendo del programa...")
+            break
+        
+       
+if __name__ == "__main__":
+    main()
+
+            
+            
+clear 
